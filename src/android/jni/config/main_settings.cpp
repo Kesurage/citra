@@ -138,4 +138,17 @@ const ConfigInfo<u16> LANDSCAPE_BOTTOM_TOP{{"Layout", "landscape_bottom_top"}, 4
 const ConfigInfo<u16> LANDSCAPE_BOTTOM_RIGHT{{"Layout", "landscape_bottom_right"}, 720};
 const ConfigInfo<u16> LANDSCAPE_BOTTOM_BOTTOM{{"Layout", "landscape_bottom_bottom"}, 960};
 
+// G100: ConfigInfos referenced by jni code, missing from public tree
+const ConfigInfo<bool> USE_HW_RENDERER{{"Renderer", "use_hw_renderer"}, true};
+const ConfigInfo<bool> USE_HW_GS{{"Debug", "hw_gs_mode"}, true};
+const ConfigInfo<std::string> AUDIO_ENGINE{{"Audio", "output_engine"}, "auto"};
+const ConfigInfo<std::string> AUDIO_DEVICE{{"Audio", "output_device"}, "auto"};
+const ConfigInfo<u8>& MIC_INPUT_TYPE = AUDIO_INPUT_TYPE;
+const ConfigInfo<std::string> MIC_INPUT_DEVICE{{"Audio", "input_device"}, "auto"};
+const ConfigInfo<std::string> CIRCLE_PAD_X{{"Controls", "circle_pad_x"}, ""};
+const ConfigInfo<std::string> CIRCLE_PAD_Y{{"Controls", "circle_pad_y"}, ""};
+const ConfigInfo<std::string> C_STICK_X{{"Controls", "c_stick_x"}, ""};
+const ConfigInfo<std::string> C_STICK_Y{{"Controls", "c_stick_y"}, ""};
+const ConfigInfo<bool> USE_CUSTOM_LAYOUT{{"Layout", "custom_layout"}, false};
+
 } // namespace Config

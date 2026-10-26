@@ -139,4 +139,16 @@ extern const ConfigInfo<u16> LANDSCAPE_BOTTOM_TOP;
 extern const ConfigInfo<u16> LANDSCAPE_BOTTOM_RIGHT;
 extern const ConfigInfo<u16> LANDSCAPE_BOTTOM_BOTTOM;
 
+// G100 additions
+extern const ConfigInfo<bool> USE_HW_RENDERER;
+extern const ConfigInfo<bool> USE_HW_GS;
+extern const ConfigInfo<std::string> AUDIO_ENGINE;
+extern const ConfigInfo<std::string> AUDIO_DEVICE;
+extern const ConfigInfo<u8>& MIC_INPUT_TYPE;
+extern const ConfigInfo<std::string> MIC_INPUT_DEVICE;
+extern const ConfigInfo<std::string> CIRCLE_PAD_X;
+extern const ConfigInfo<std::string> CIRCLE_PAD_Y;
+extern const ConfigInfo<std::string> C_STICK_X;
+extern const ConfigInfo<std::string> C_STICK_Y;
+extern const ConfigInfo<bool> USE_CUSTOM_LAYOUT;
 } // namespace Config
