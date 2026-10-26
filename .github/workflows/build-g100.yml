@@ -21,7 +21,7 @@ jobs:
       - uses: nttld/setup-ndk@v1
         id: ndk
         with:
-          ndk-version: 27.0.12077973
+          ndk-version: r25b
 
       - uses: gradle/actions/setup-gradle@v4
         with:

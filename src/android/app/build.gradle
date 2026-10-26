@@ -57,6 +57,7 @@ android {
     lint {
         abortOnError false
     }
+    ndkVersion '25.1.8937393'
     namespace 'org.citra.emu'
 
     defaultConfig {
