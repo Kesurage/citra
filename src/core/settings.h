@@ -215,6 +215,13 @@ struct Values {
     bool allow_shadow = true;
     bool display_transfer_hack = false;
     bool use_linear_filter = true;
+    // G100: members referenced by core/jni, missing from public tree
+    bool enable_dsp_lle_multithread = true;
+    bool enable_telemetry = false;
+    bool preload_textures = false;
+    bool use_hw_gs = true;
+    bool y2r_perform_hack = false;
+    float volume = 1.0f;
     bool use_shader_cache;
     bool skip_slow_draw;
     bool skip_cpu_write;
