@@ -387,6 +387,15 @@ JNIEXPORT void JNICALL Java_org_citra_emu_NativeLibrary_SetBackgroundImage(JNIEn
     env->DeleteLocalRef(jpixels);
 }
 
+JNIEXPORT void JNICALL Java_org_citra_emu_NativeLibrary_SetBackgroundGLSL(JNIEnv* env, jclass obj,
+                                                                        jstring jglsl) {
+    // G100: background.glsl theme import is a no-op (feature lives only in
+    // weihuoya's private tree); kept so the theme importer doesn't crash.
+    (void)env;
+    (void)obj;
+    (void)jglsl;
+}
+
 JNIEXPORT void JNICALL Java_org_citra_emu_NativeLibrary_InputEvent(JNIEnv* env, jclass obj,
                                                                    jint button, jfloat value) {
     if (InputManager::GetInstance().InputEvent(button, value)) {

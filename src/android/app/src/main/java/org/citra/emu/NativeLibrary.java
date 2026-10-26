@@ -384,6 +384,7 @@ public final class NativeLibrary {
     public static native void setCustomLayout(boolean isTopScreen, int left, int top, int right, int bottom);
     public static native Rect getCustomLayout(boolean isTopScreen);
     public static native void SetBackgroundImage(int[] pixels, int width, int height);
+    public static native void SetBackgroundGLSL(String glsl);
     public static native void ResetCamera();
     public static native void reloadCheatCode();
 

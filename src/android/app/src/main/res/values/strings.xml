@@ -136,6 +136,13 @@
     <string name="emulation_screen_layout">Custom Layout</string>
     <string name="emulation_stop_running">Exit Game</string>
     <string name="emulation_done">Done</string>
+    <string name="chat_hint">Chat message</string>
+    <string name="chat_send">Send</string>
+    <string name="translate_settings">Translation</string>
+    <string name="baidu_ocr_key">Baidu OCR API Key</string>
+    <string name="baidu_ocr_secret">Baidu OCR API Secret</string>
+    <string name="combo_key_name">Combo Key %1$d</string>
+    <string name="amiibo_hint">No amiibo files found (place .bin files in the amiibo directory)</string>
     <string name="input_binding">Input Binding</string>
     <string name="input_binding_description">Press or move an input to bind it to &lt;b>%1$s&lt;/b>.</string>
     <string name="emulation_screenshot">Take Screenshot</string>
