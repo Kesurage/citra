@@ -20,8 +20,9 @@ const ConfigInfo<bool> USE_GLES{{"Renderer", "use_gles"}, true};
 const ConfigInfo<bool> SHOW_FPS{{"Renderer", "show_fps"}, true};
 const ConfigInfo<bool> USE_HW_SHADER{{"Renderer", "use_hw_shader"}, true};
 const ConfigInfo<bool> USE_SHADER_JIT{{"Renderer", "use_shader_jit"}, false};
+// G100: accurate_mul ON by default - fixes MH4U monster skin / texture blending glitches
 const ConfigInfo<Settings::AccurateMul> SHADERS_ACCURATE_MUL{{"Renderer", "accurate_mul_type"},
-                                                             Settings::AccurateMul::OFF};
+                                                             Settings::AccurateMul::ON};
 // G100 profile: 3x = 1200x720 top screen (true 720p), stable 30fps
 const ConfigInfo<u16> RESOLUTION_FACTOR{{"Renderer", "resolution_factor"}, 3};
 const ConfigInfo<bool> USE_FRAME_LIMIT{{"Renderer", "use_frame_limit"}, true};
