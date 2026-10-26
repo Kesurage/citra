@@ -129,3 +129,71 @@ void NativeLibrary::ImageLoadedCallback(u32* pixels, u32 width, u32 height) {
     s_image_loaded_callback(pixels, width, height);
     s_image_loaded_callback = nullptr;
 }
+
+// cubeb JNI audio-latency bridge.
+// Replaces cubeb/src/cubeb-jni.cpp (stripped in CI because its two helper
+// functions are already provided above and would collide at link time).
+extern "C" {
+
+struct cubeb_jni {
+    jobject s_audio_manager_obj = nullptr;
+    jclass s_audio_manager_class = nullptr;
+    jmethodID s_get_output_latency_id = nullptr;
+};
+
+static constexpr int AUDIO_STREAM_TYPE_MUSIC = 3;
+
+cubeb_jni* cubeb_jni_init() {
+    JNIEnv* env = cubeb_get_jni_env_for_thread();
+    jobject ctx_obj = cubeb_jni_get_context_instance();
+    if (!env || !ctx_obj) {
+        return nullptr;
+    }
+
+    cubeb_jni* p = new cubeb_jni;
+
+    jclass context_class = env->FindClass("android/content/Context");
+    jfieldID audio_service_field =
+        env->GetStaticFieldID(context_class, "AUDIO_SERVICE", "Ljava/lang/String;");
+    jstring jstr = (jstring)env->GetStaticObjectField(context_class, audio_service_field);
+    jmethodID get_system_service_id = env->GetMethodID(
+        context_class, "getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;");
+    jobject audio_manager_obj = env->CallObjectMethod(ctx_obj, get_system_service_id, jstr);
+    p->s_audio_manager_obj = (jobject)env->NewGlobalRef(audio_manager_obj);
+
+    jclass audio_manager_class = env->FindClass("android/media/AudioManager");
+    p->s_audio_manager_class = (jclass)env->NewGlobalRef(audio_manager_class);
+    p->s_get_output_latency_id =
+        env->GetMethodID(audio_manager_class, "getOutputLatency", "(I)I");
+
+    env->DeleteLocalRef(ctx_obj);
+    env->DeleteLocalRef(context_class);
+    env->DeleteLocalRef(jstr);
+    env->DeleteLocalRef(audio_manager_obj);
+    env->DeleteLocalRef(audio_manager_class);
+
+    return p;
+}
+
+int cubeb_get_output_latency_from_jni(cubeb_jni* p) {
+    JNIEnv* env = cubeb_get_jni_env_for_thread();
+    if (!env || !p) {
+        return 0;
+    }
+    return env->CallIntMethod(p->s_audio_manager_obj, p->s_get_output_latency_id,
+                              AUDIO_STREAM_TYPE_MUSIC);
+}
+
+void cubeb_jni_destroy(cubeb_jni* p) {
+    if (!p) {
+        return;
+    }
+    JNIEnv* env = cubeb_get_jni_env_for_thread();
+    if (env) {
+        env->DeleteGlobalRef(p->s_audio_manager_obj);
+        env->DeleteGlobalRef(p->s_audio_manager_class);
+    }
+    delete p;
+}
+
+} // extern "C"
