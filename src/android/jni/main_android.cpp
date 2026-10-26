@@ -473,7 +473,7 @@ JNIEXPORT void JNICALL Java_org_citra_emu_NativeLibrary_Run(JNIEnv* env, jclass 
     Settings::values.audio_device_id = Config::Get(Config::AUDIO_DEVICE);
     Settings::values.enable_audio_stretching = Config::Get(Config::AUDIO_STRETCHING);
     // mic
-    Settings::values.mic_input_type = Config::Get(Config::MIC_INPUT_TYPE);
+    Settings::values.mic_input_type = (Settings::MicInputType)Config::Get(Config::MIC_INPUT_TYPE);
     Settings::values.mic_input_device = Config::Get(Config::MIC_INPUT_DEVICE);
     // debug
     Settings::values.shadow_rendering = Config::Get(Config::SHADOW_RENDERING);
