@@ -22,7 +22,8 @@ const ConfigInfo<bool> USE_HW_SHADER{{"Renderer", "use_hw_shader"}, true};
 const ConfigInfo<bool> USE_SHADER_JIT{{"Renderer", "use_shader_jit"}, false};
 const ConfigInfo<Settings::AccurateMul> SHADERS_ACCURATE_MUL{{"Renderer", "accurate_mul_type"},
                                                              Settings::AccurateMul::OFF};
-const ConfigInfo<u16> RESOLUTION_FACTOR{{"Renderer", "resolution_factor"}, 1};
+// G100 profile: 3x = 1200x720 top screen (true 720p), stable 30fps
+const ConfigInfo<u16> RESOLUTION_FACTOR{{"Renderer", "resolution_factor"}, 3};
 const ConfigInfo<bool> USE_FRAME_LIMIT{{"Renderer", "use_frame_limit"}, true};
 const ConfigInfo<u16> FRAME_LIMIT{{"Renderer", "frame_limit"}, 100};
 const ConfigInfo<u8> FACTOR_3D{{"Renderer", "factor_3d"}, 0};
@@ -63,7 +64,7 @@ const ConfigInfo<bool> SKIP_SLOW_DRAW{{"Debug", "skip_slow_draw"}, false};
 const ConfigInfo<bool> SKIP_CPU_WRITE{{"Debug", "skip_cpu_write"}, false};
 const ConfigInfo<bool> SKIP_TEXTURE_COPY{{"Debug", "skip_texture_copy"}, false};
 const ConfigInfo<u8> FORCE_TEXTURE_FILTER{{"Debug", "force_texture_filter"}, 0};
-const ConfigInfo<bool> ASYNC_SHADER_COMPILE{{"Debug", "async_shader_compile"}, false};
+const ConfigInfo<bool> ASYNC_SHADER_COMPILE{{"Debug", "async_shader_compile"}, true};
 const ConfigInfo<bool> USE_COMPATIBLE_MODE{{"Debug", "use_compatible_mode"}, false};
 const ConfigInfo<bool> USE_PRESENT_THREAD{{"Debug", "use_present_thread"}, true};
 const ConfigInfo<bool> SHADOW_RENDERING{{"Debug", "shadow_rendering"}, true};

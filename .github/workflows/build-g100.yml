@@ -1,0 +1,41 @@
+name: build-g100
+
+on:
+  push:
+    branches: [ g100 ]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: nttld/setup-ndk@v1
+        id: ndk
+        with:
+          ndk-version: r25b
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.13"
+
+      - name: Build APK
+        working-directory: src/android
+        run: |
+          echo "ndk.dir=${{ steps.ndk.outputs.ndk-path }}" > local.properties
+          echo "sdk.dir=$ANDROID_HOME" >> local.properties
+          gradle assembleRelease --no-daemon --stacktrace
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: mh4u-g100-apk
+          path: src/android/app/build/outputs/apk/release/*.apk
