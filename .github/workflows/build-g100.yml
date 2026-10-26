@@ -63,14 +63,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p dist
+          rm -rf apk-dist && mkdir -p apk-dist
           for f in src/android/app/build/outputs/apk/release/*.apk; do
-            cp "$f" "dist/mh4u-g100-${GITHUB_SHA:0:12}.apk"
-            cp "$f" dist/app-release.apk
+            cp "$f" "apk-dist/mh4u-g100-${GITHUB_SHA:0:12}.apk"
+            cp "$f" apk-dist/app-release.apk
           done
-          (cd dist && sha256sum *.apk > SHA256SUMS)
+          (cd apk-dist && sha256sum *.apk > SHA256SUMS)
           if ! gh release view builds --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             gh release create builds --repo "$GITHUB_REPOSITORY" --title "Builds" \
               --notes "Signed APK builds from the g100 branch. SHA256SUMS carries the checksums." --prerelease
           fi
-          gh release upload builds --repo "$GITHUB_REPOSITORY" dist/* --clobber
+          gh release upload builds --repo "$GITHUB_REPOSITORY" apk-dist/mh4u-g100-*.apk apk-dist/app-release.apk apk-dist/SHA256SUMS --clobber
