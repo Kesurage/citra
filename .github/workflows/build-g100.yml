@@ -30,7 +30,7 @@ jobs:
       - name: Generate keystore
         working-directory: src/android
         run: |
-          keytool -genkeypair -v -keystore g100.jks -alias g100 \
+          keytool -genkeypair -v -keystore app/g100.jks -alias g100 \
             -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass g100pass -keypass g100pass \
             -dname "CN=MH4U G100, OU=Preservation, O=Kesurage, L=NA, S=NA, C=US"
