@@ -44,6 +44,8 @@ jobs:
         run: |
           echo "ndk.dir=${{ steps.ndk.outputs.ndk-path }}" > local.properties
           echo "sdk.dir=$ANDROID_HOME" >> local.properties
+          # G100: MMJ jni_common.cpp already provides cubeb JNI symbols (path is repo root, cwd is src/android)
+          sed -i 's|    src/cubeb-jni.cpp)||' ../../externals/cubeb/CMakeLists.txt
           # G100: MMJ jni_common.cpp already provides cubeb JNI symbols
           sed -i 's|    src/cubeb-jni.cpp||' externals/cubeb/CMakeLists.txt
           gradle assembleRelease --no-daemon --stacktrace
