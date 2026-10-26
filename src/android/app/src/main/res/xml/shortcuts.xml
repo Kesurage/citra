@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="play"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:shortcutShortLabel="@string/app_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="org.citra.emu.g100"
+            android:targetClass="org.citra.emu.ui.MainActivity" />
+    </shortcut>
+</shortcuts>
