@@ -54,7 +54,6 @@ android {
         }
     }
 
-    ndkVersion = '29.0.14206865'
     lint {
         abortOnError false
     }
