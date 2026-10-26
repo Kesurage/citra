@@ -400,7 +400,7 @@ public final class EmulationActivity extends AppCompatActivity {
         if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
             landscape = false;
         }
-        Bitmap bitmap = mBitmaps.get(landscape ? R.drawable.bg_landscape : R.drawable.bg_portrait);
+        Bitmap bitmap = mBitmaps != null ? mBitmaps.get(landscape ? R.drawable.bg_landscape : R.drawable.bg_portrait) : null;
         if (bitmap != null) {
             bitmap = rotateBitmap(bitmap, 90);
             int width = bitmap.getWidth();
@@ -465,8 +465,13 @@ public final class EmulationActivity extends AppCompatActivity {
     public Bitmap getInputBitmap(int id, float scale) {
         Bitmap origin = BitmapFactory.decodeResource(getResources(), id);
         float oriWidth = origin.getWidth();
-        // theme
-        Bitmap bitmap = mBitmaps.get(id);
+        // theme (the InitTask may not have loaded the theme map yet, or a theme bitmap
+        // may be missing: fall back to the drawable itself instead of crashing, so the
+        // buttons always draw)
+        Bitmap bitmap = mBitmaps != null ? mBitmaps.get(id) : null;
+        if (bitmap == null) {
+            return origin;
+        }
         int dstWidth = bitmap.getWidth();
         int dstHeight = bitmap.getHeight();
         // adjust scale by default theme bitmap width
