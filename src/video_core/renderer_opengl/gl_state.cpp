@@ -389,10 +389,10 @@ GLuint OpenGLState::BindDrawFramebuffer(GLuint framebuffer) {
 }
 
 GLuint OpenGLState::BindRenderbuffer(GLuint buffer) {
-    GLuint previous = cur_state.draw.renderbuffer;
+    GLuint previous = cur_state.renderbuffer;
     if (previous != buffer) {
         glBindRenderbuffer(GL_RENDERBUFFER, buffer);
-        cur_state.draw.renderbuffer = buffer;
+        cur_state.renderbuffer = buffer;
     }
     return previous;
 }
