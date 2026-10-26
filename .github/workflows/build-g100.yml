@@ -27,8 +27,20 @@ jobs:
         with:
           gradle-version: "8.13"
 
+      - name: Generate keystore
+        working-directory: src/android
+        run: |
+          keytool -genkeypair -v -keystore g100.jks -alias g100 \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass g100pass -keypass g100pass \
+            -dname "CN=MH4U G100, OU=Preservation, O=Kesurage, L=NA, S=NA, C=US"
+
       - name: Build APK
         working-directory: src/android
+        env:
+          KS_FILE: g100.jks
+          KS_ALIAS: g100
+          KS_PASS: g100pass
         run: |
           echo "ndk.dir=${{ steps.ndk.outputs.ndk-path }}" > local.properties
           echo "sdk.dir=$ANDROID_HOME" >> local.properties

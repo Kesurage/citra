@@ -19,10 +19,11 @@ android {
 
     signingConfigs {
         release {
-            keyAlias 'dolphin-release-key'
-            keyPassword 'zhangwei'
-            storeFile file('D:/Android/android-sign-key/dolphin-release-key.jks')
-            storePassword 'zhangwei'
+            // G100 build: sign with CI-generated keystore (see workflow)
+            keyAlias System.getenv('KS_ALIAS') ?: 'g100'
+            keyPassword System.getenv('KS_PASS') ?: 'g100pass'
+            storeFile file(System.getenv('KS_FILE') ?: 'g100.jks')
+            storePassword System.getenv('KS_PASS') ?: 'g100pass'
         }
     }
 
@@ -31,8 +32,8 @@ android {
         // Signed by release key, allowing for upload to Play Store.
         release {
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
