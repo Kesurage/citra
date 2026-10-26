@@ -211,6 +211,10 @@ struct Values {
     bool async_shader_compile;
     bool use_separable_shader;
     bool shadow_rendering;
+    // G100: members referenced by gl_rasterizer, missing from public tree
+    bool allow_shadow = true;
+    bool display_transfer_hack = false;
+    bool use_linear_filter = true;
     bool use_shader_cache;
     bool skip_slow_draw;
     bool skip_cpu_write;
